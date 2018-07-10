@@ -1,0 +1,30 @@
+app:
+  starter:
+    outputFolder: ./output
+
+    parentAppName: computer-vision
+    parentAppVersion: 1.0.0.BUILD-SNAPSHOT
+
+    springCloudStreamVersion: 2.0.0.RELEASE
+    springCloudDependenciesParentVersion: 2.0.2.RELEASE
+
+    apps:
+      - appName: video-source
+        appType: source
+        appVersion: 1.0.0.BUILD-SNAPSHOT
+
+      - appName: webcam-source
+        appType: source
+        appVersion: 1.0.0.BUILD-SNAPSHOT
+
+      - appName: ocr-reader
+        appType: processor
+        appVersion: 1.0.0.BUILD-SNAPSHOT
+
+      - appName: qr-reader
+        appType: processor
+        appVersion: 1.0.0.BUILD-SNAPSHOT
+
+      - appName: image-viewer
+        appType: sink
+        appVersion: 1.0.0.BUILD-SNAPSHOT
