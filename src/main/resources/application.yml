@@ -1,0 +1,24 @@
+app:
+  starter:
+    outputFolder: ./target/output
+
+    parentAppName: koza
+
+    parentAppVersion: 1.0.0.BUILD-SNAPSHOT
+
+    springCloudStreamVersion: 2.0.0.RELEASE
+
+    springCloudDependenciesParentVersion: 2.0.2.RELEASE
+
+    apps:
+      - appName: koza1
+        appType: source
+        appVersion: 1.0.0.BUILD-SNAPSHOT
+
+      - appName: koza2
+        appType: processor
+        appVersion: 1.0.0.BUILD-SNAPSHOT
+
+      - appName: koza3
+        appType: sink
+        appVersion: 1.0.0.BUILD-SNAPSHOT

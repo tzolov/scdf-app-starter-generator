@@ -1,0 +1,51 @@
+## Spring Cloud Data Flow Application Starters Project Generator
+
+Uses YAML to generate app-starter project. For example lets create a `test.yml` file whit this content:
+
+```
+app:
+  starter:
+    outputFolder: ./output
+
+    parentAppName: hello-world
+    parentAppVersion: 1.0.0.BUILD-SNAPSHOT
+
+    springCloudStreamVersion: 2.0.0.RELEASE
+    springCloudDependenciesParentVersion: 2.0.2.RELEASE
+
+    apps:
+      - appName: hello1
+        appType: source
+        appVersion: 1.0.0.BUILD-SNAPSHOT
+
+      - appName: hello2
+        appType: source
+        appVersion: 1.0.0.BUILD-SNAPSHOT
+
+      - appName: hello3
+        appType: processor
+        appVersion: 1.0.0.BUILD-SNAPSHOT
+
+      - appName: hello4
+        appType: sink
+        appVersion: 1.0.0.BUILD-SNAPSHOT
+
+```
+
+Runt the generator against the test.yml :
+
+```
+java -jar ./scdf-app-starter-generator-0.0.1-SNAPSHOT.jar --spring.config.location=.//test.yml
+```
+
+Will generate under the `./output` folder an app starters project structure like this:
+
+image:./main/resources/doc/app-starters-file-structure.png[300, 400]
+
+Go inside the `hello-world` and generate the app starters:
+
+```
+mvn clean install -PgenerateApps
+```
+
+Above will create an `apps` folder with generated apps starters

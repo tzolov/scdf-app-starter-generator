@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.springframework.cloud.stream.app</groupId>
+	<artifactId>{{parent-app-name}}-app-dependencies</artifactId>
+	<version>{{parent-app-version}}</version>
+	<packaging>pom</packaging>
+	<name>{{parent-app-name}}-app-dependencies</name>
+	<description>Spring Cloud Stream {{parent-app-name}} App Dependencies</description>
+
+	<parent>
+		<artifactId>spring-cloud-dependencies-parent</artifactId>
+		<groupId>org.springframework.cloud</groupId>
+		<version>{{spring-cloud-dependencies-parent-version}}</version>
+		<relativePath/>
+	</parent>
+
+	<properties>
+		<spring-cloud-stream.version>{{spring-cloud-stream-version}}</spring-cloud-stream.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud.stream.app</groupId>
+				<artifactId>spring-cloud-starter-stream-common-{{parent-app-name}}</artifactId>
+				<version>{{parent-app-version}}</version>
+			</dependency>
+
+			{{#apps}}
+			<dependency>
+				<groupId>org.springframework.cloud.stream.app</groupId>
+				<artifactId>spring-cloud-starter-stream-{{appType}}-{{appName}}</artifactId>
+				<version>{{appVersion}}</version>
+			</dependency>
+			{{/apps}}
+
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-common</artifactId>
+				<version>${spring-cloud-common.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.cloud.stream.app</groupId>
+				<artifactId>{{parent-app-name}}-app-starters-test-support</artifactId>
+				<version>{{parent-app-version}}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-stream-test-support</artifactId>
+				<version>${spring-cloud-stream.version}</version>
+				<scope>test</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+</project>

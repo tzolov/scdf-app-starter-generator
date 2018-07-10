@@ -1,0 +1,26 @@
+app:
+  starter:
+    outputFolder: ./output
+
+    parentAppName: hello-world
+    parentAppVersion: 1.0.0.BUILD-SNAPSHOT
+
+    springCloudStreamVersion: 2.0.0.RELEASE
+    springCloudDependenciesParentVersion: 2.0.2.RELEASE
+
+    apps:
+      - appName: hello1
+        appType: source
+        appVersion: 1.0.0.BUILD-SNAPSHOT
+
+      - appName: hello2
+        appType: source
+        appVersion: 1.0.0.BUILD-SNAPSHOT
+
+      - appName: hello3
+        appType: processor
+        appVersion: 1.0.0.BUILD-SNAPSHOT
+
+      - appName: hello4
+        appType: sink
+        appVersion: 1.0.0.BUILD-SNAPSHOT
