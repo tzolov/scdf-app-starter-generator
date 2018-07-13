@@ -43,7 +43,6 @@ public class {{AppName}}SinkConfiguration {
 	@Autowired
 	private {{AppName}}SinkProperties properties;
 
-    @Bean
     @ServiceActivator(inputChannel = Sink.INPUT)
     public void handle(Message<?> message) {
     }
