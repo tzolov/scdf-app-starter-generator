@@ -139,7 +139,7 @@ public class ScdfAppStarterGeneratorApplication implements CommandLineRunner {
 		String propertyClassName = String.format("%s%sProperties", camelCase(appDefinition.getAppName()), capitalize(appDefinition.getAppType()));
 		FileCopyUtils.copy(
 				String.format("configuration-properties.classes=org.springframework.cloud.stream.app.%s.%s.%s",
-						appDefinition.getAppName(), appDefinition.getAppType(), propertyClassName),
+						toPkg(appDefinition.getAppName()), appDefinition.getAppType(), propertyClassName),
 				new FileWriter(file(appMetaInfDir, "spring-configuration-metadata-whitelist.properties")));
 
 		// app Properties Class
