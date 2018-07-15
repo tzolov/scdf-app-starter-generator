@@ -1,0 +1,11 @@
+# Spring Cloud Stream {{ParentAppName}} Applications
+
+---
+{{#apps}}
+### {{AppName}} {{AppType}}
+*Description*: TODO
+
+include::spring-cloud-starter-stream-{{appType}}-{{appName}}/README.adoc[]
+---
+
+{{/apps}}

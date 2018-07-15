@@ -9,16 +9,16 @@ app:
     springCloudDependenciesParentVersion: 2.0.2.RELEASE
 
     apps:
-      - appName: video-source
-        appType: source
-        appVersion: 1.0.0.BUILD-SNAPSHOT
-
       - appName: webcam
         appType: source
         appVersion: 1.0.0.BUILD-SNAPSHOT
 
       - appName: frame-grabber
         appType: source
+        appVersion: 1.0.0.BUILD-SNAPSHOT
+
+      - appName: frame-recorder
+        appType: sink
         appVersion: 1.0.0.BUILD-SNAPSHOT
 
       - appName: ocr-reader

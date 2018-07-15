@@ -61,6 +61,14 @@ public class ScdfAppStarterGeneratorApplication implements CommandLineRunner {
 				new FileWriter(file(appParentDir, "pom.xml")));
 
 		// ---------------------------------
+		// App Parent README
+		// ---------------------------------
+		appParentDir.mkdirs();
+		FileCopyUtils.copy(
+				materialize("classpath:/template/README-parent.adoc", templateProperties),
+				new FileWriter(file(appParentDir, "README.adoc")));
+
+		// ---------------------------------
 		// App Dependency Sub Project
 		// ---------------------------------
 		File appDependencyDir = file(appParentDir, properties.getParentAppName() + "-app-dependencies");
@@ -156,7 +164,7 @@ public class ScdfAppStarterGeneratorApplication implements CommandLineRunner {
 		// README
 		FileCopyUtils.copy(
 				materialize("classpath:/template/README.adoc", templateProperties),
-				new FileWriter(file(toDirs(appDir, "src.main.resources"), "README.adoc")));
+				new FileWriter(file(appDir, "README.adoc")));
 
 	}
 
