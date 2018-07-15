@@ -13,7 +13,11 @@ app:
         appType: source
         appVersion: 1.0.0.BUILD-SNAPSHOT
 
-      - appName: webcam-source
+      - appName: webcam
+        appType: source
+        appVersion: 1.0.0.BUILD-SNAPSHOT
+
+      - appName: frame-grabber
         appType: source
         appVersion: 1.0.0.BUILD-SNAPSHOT
 

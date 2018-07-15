@@ -152,6 +152,12 @@ public class ScdfAppStarterGeneratorApplication implements CommandLineRunner {
 		FileCopyUtils.copy(
 				materialize("classpath:/template/App" + capitalize(appDefinition.getAppType()) + "Configuration.java", templateProperties),
 				new FileWriter(file(appSrcDir, configurationClassName)));
+
+		// README
+		FileCopyUtils.copy(
+				materialize("classpath:/template/README.adoc", templateProperties),
+				new FileWriter(file(toDirs(appDir, "src.main.resources"), "README.adoc")));
+
 	}
 
 	private String toPkg(String text) {
