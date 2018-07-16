@@ -131,9 +131,9 @@ public class ScdfAppStarterGeneratorApplication implements CommandLineRunner {
 				materialize("classpath:/template/app-" + appDefinition.getAppType() + "-pom.xml", templateProperties),
 				new FileWriter(file(appDir, "pom.xml")));
 
-		String appPackageName = String.format("src.main.java.org.springframework.cloud.stream.app.%s.%s", toPkg(appDefinition.getAppName()), appDefinition.getAppType());
-		File appSrcDir = toDirs(appDir, appPackageName);
-		appSrcDir.mkdirs();
+		String appPackageName = String.format("org.springframework.cloud.stream.app.%s.%s", toPkg(appDefinition.getAppName()), appDefinition.getAppType());
+		File appMainSrcDir = toDirs(appDir, "src.main.java." + appPackageName);
+		appMainSrcDir.mkdirs();
 
 		File appMetaInfDir = toDirs(appDir, "src.main.resources.META-INF");
 		appMetaInfDir.mkdirs();
@@ -153,13 +153,25 @@ public class ScdfAppStarterGeneratorApplication implements CommandLineRunner {
 		// app Properties Class
 		FileCopyUtils.copy(
 				materialize("classpath:/template/PropertiesClass.java", templateProperties),
-				new FileWriter(file(appSrcDir, propertyClassName + ".java")));
+				new FileWriter(file(appMainSrcDir, propertyClassName + ".java")));
 
 		// app Configurations Class
 		String configurationClassName = camelCase(appDefinition.getAppName() + "-" + appDefinition.getAppType() + "-configuration.java");
 		FileCopyUtils.copy(
 				materialize("classpath:/template/App" + capitalize(appDefinition.getAppType()) + "Configuration.java", templateProperties),
-				new FileWriter(file(appSrcDir, configurationClassName)));
+				new FileWriter(file(appMainSrcDir, configurationClassName)));
+
+		// TESTS
+		if (appDefinition.getAppType().equalsIgnoreCase("processor")) {
+			File appTestSrcDir = toDirs(appDir, "src.test.java." + appPackageName);
+			appTestSrcDir.mkdirs();
+
+			String integrationTestClassName = camelCase(appDefinition.getAppName() + "-" + appDefinition.getAppType() + "-integration-tests.java");
+			FileCopyUtils.copy(
+					materialize("classpath:/template/App" + capitalize(appDefinition.getAppType()) + "IntegrationTests.java", templateProperties),
+					new FileWriter(file(appTestSrcDir, integrationTestClassName)));
+		}
+
 
 		// README
 		FileCopyUtils.copy(
