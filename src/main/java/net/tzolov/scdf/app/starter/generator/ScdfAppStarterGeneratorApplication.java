@@ -162,7 +162,7 @@ public class ScdfAppStarterGeneratorApplication implements CommandLineRunner {
 				new FileWriter(file(appMainSrcDir, configurationClassName)));
 
 		// TESTS
-		if (appDefinition.getAppType().equalsIgnoreCase("processor")) {
+		if (!appDefinition.getAppType().equalsIgnoreCase("sink")) {
 			File appTestSrcDir = toDirs(appDir, "src.test.java." + appPackageName);
 			appTestSrcDir.mkdirs();
 
