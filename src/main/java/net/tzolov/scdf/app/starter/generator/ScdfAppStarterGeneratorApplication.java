@@ -162,16 +162,13 @@ public class ScdfAppStarterGeneratorApplication implements CommandLineRunner {
 				new FileWriter(file(appMainSrcDir, configurationClassName)));
 
 		// TESTS
-		if (!appDefinition.getAppType().equalsIgnoreCase("sink")) {
-			File appTestSrcDir = toDirs(appDir, "src.test.java." + appPackageName);
-			appTestSrcDir.mkdirs();
+		File appTestSrcDir = toDirs(appDir, "src.test.java." + appPackageName);
+		appTestSrcDir.mkdirs();
 
-			String integrationTestClassName = camelCase(appDefinition.getAppName() + "-" + appDefinition.getAppType() + "-integration-tests.java");
-			FileCopyUtils.copy(
-					materialize("classpath:/template/App" + capitalize(appDefinition.getAppType()) + "IntegrationTests.java", templateProperties),
-					new FileWriter(file(appTestSrcDir, integrationTestClassName)));
-		}
-
+		String integrationTestClassName = camelCase(appDefinition.getAppName() + "-" + appDefinition.getAppType() + "-integration-tests.java");
+		FileCopyUtils.copy(
+				materialize("classpath:/template/App" + capitalize(appDefinition.getAppType()) + "IntegrationTests.java", templateProperties),
+				new FileWriter(file(appTestSrcDir, integrationTestClassName)));
 
 		// README
 		FileCopyUtils.copy(

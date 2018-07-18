@@ -3,10 +3,12 @@
 
 
 == Options
+
 //tag::configuration-properties[]
 //end::configuration-properties[]
 
 //end::ref-doc[]
+
 == Build
 
 Build involves two-stages. First build the apps and generate the binder specific app starters projects:

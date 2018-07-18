@@ -27,11 +27,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringBootConfiguration;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.cloud.stream.messaging.Source;
-import org.springframework.cloud.stream.test.binder.MessageCollector;
+import org.springframework.cloud.stream.messaging.Sink;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.integration.support.MessageBuilder;
+import org.springframework.messaging.support.GenericMessage;
 import org.springframework.messaging.Message;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.TestPropertySource;
@@ -52,10 +52,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public abstract class {{AppName}}{{Type}}IntegrationTests {
 
 	@Autowired
-	protected Source channels;
-
-	@Autowired
-	protected MessageCollector messageCollector;
+	protected Sink sink;
 
 	@TestPropertySource(properties = {
 			"debug=true",
@@ -67,9 +64,8 @@ public abstract class {{AppName}}{{Type}}IntegrationTests {
 		@Test
 		public void testOne() throws InterruptedException {
 
-			Message<?> received = messageCollector.forChannel(this.channels.output()).poll(10, TimeUnit.SECONDS);
-
-			Assert.assertNotNull(received);
+			sink.input().send(new GenericMessage("hello"));
+			// Assert.assertNotNull(.. target resources ..);
 		}
 	}
 
