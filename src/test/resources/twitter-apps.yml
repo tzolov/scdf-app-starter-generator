@@ -1,0 +1,34 @@
+app:
+  starter:
+    outputFolder: ./output
+
+    parentAppName: twitter
+    parentAppVersion: 2.1.0.BUILD-SNAPSHOT
+
+    springCloudStreamVersion: 2.1.0.RC3
+    springCloudDependenciesParentVersion: 2.1.0.RC3
+
+    apps:
+      - appName: twitter-search
+        appType: source
+        appVersion: 2.1.0.BUILD-SNAPSHOT
+
+      - appName: twitter-stream
+        appType: source
+        appVersion: 2.1.0.BUILD-SNAPSHOT
+
+      - appName: twitter-timeline
+        appType: source
+        appVersion: 2.1.0.BUILD-SNAPSHOT
+
+      - appName: twitter-update
+        appType: sink
+        appVersion: 2.1.0.BUILD-SNAPSHOT
+
+      - appName: twitter-message
+        appType: sink
+        appVersion: 2.1.0.BUILD-SNAPSHOT
+
+      - appName: twitter-message
+        appType: source
+        appVersion: 2.1.0.BUILD-SNAPSHOT

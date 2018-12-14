@@ -32,3 +32,19 @@ app:
       - appName: image-viewer
         appType: sink
         appVersion: 1.0.0.BUILD-SNAPSHOT
+
+      - appName: face-detection-mtcnn
+        appType: processor
+        appVersion: 1.0.0.BUILD-SNAPSHOT
+
+      - appName: face-recognition
+        appType: processor
+        appVersion: 1.0.0.BUILD-SNAPSHOT
+
+      - appName: semantic-segmentation
+        appType: processor
+        appVersion: 1.0.0.BUILD-SNAPSHOT
+
+      - appName: semantic-segmentation-cv
+        appType: processor
+        appVersion: 1.0.0.BUILD-SNAPSHOT
