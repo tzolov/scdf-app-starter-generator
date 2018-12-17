@@ -16,20 +16,26 @@
 
 package org.springframework.cloud.stream.app.{{app-name-pkg}}.source;
 
+import java.time.Duration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import reactor.core.publisher.Flux;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.messaging.Source;
+import org.springframework.cloud.stream.annotation.Output;
 
-import org.springframework.integration.annotation.InboundChannelAdapter;
-import org.springframework.integration.annotation.Poller;
-import org.springframework.integration.core.MessageSource;
-import org.springframework.messaging.support.GenericMessage;
+import org.springframework.cloud.stream.reactive.StreamEmitter;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.MessageHeaders;
+import org.springframework.messaging.support.MessageBuilder;
+import org.springframework.util.MimeTypeUtils;
 
 /**
+ * Reactive Poller Source:
+ * http://cloud.spring.io/spring-cloud-static/spring-cloud-stream/2.1.0.RC3/single/spring-cloud-stream.html#_reactive_sources
  *
  * @author Christian Tzolov
  */
@@ -42,8 +48,15 @@ public class {{AppName}}SourceConfiguration {
 	@Autowired
 	private {{AppName}}SourceProperties properties;
 
-    @InboundChannelAdapter(value = Source.OUTPUT, poller = @Poller(fixedDelay = "10", maxMessagesPerPoll = "1"))
-    public MessageSource<String> myMessageSource(){
-		return ()->new GenericMessage<>("Hello Spring Cloud Stream");
-    }
+	@StreamEmitter
+	@Output(Source.OUTPUT)
+	public Flux<Message<byte[]>> emit() {
+		return Flux.interval(Duration.ofMillis(1000)).map(l -> {
+			return MessageBuilder
+				.withPayload("Hello".getBytes())
+				.setHeader(MessageHeaders.CONTENT_TYPE, MimeTypeUtils.APPLICATION_JSON_VALUE)
+				.build();
+		});
+	}
+
 }

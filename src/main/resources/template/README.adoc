@@ -38,3 +38,8 @@ And here is a example pipeline that uses {{app-name}}:
 {{app-name}}-stream= TODO
 ```
 
+== Application Sub Types support:
+
+* `source` : none, functional, reactive, reactive_stream
+* `processor` : none, functional, reactive
+* `sink` : none, functional

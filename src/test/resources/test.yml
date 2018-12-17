@@ -5,6 +5,8 @@ app:
     parentAppName: hello-world
     parentAppVersion: 1.0.0.BUILD-SNAPSHOT
 
+    appStartersBuildVersion: 2.0.0.RELEASE
+
     springCloudStreamVersion: 2.0.0.RELEASE
     springCloudDependenciesParentVersion: 2.0.2.RELEASE
 

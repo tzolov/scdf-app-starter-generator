@@ -16,23 +16,26 @@
 
 package org.springframework.cloud.stream.app.{{app-name-pkg}}.source;
 
+import java.util.Date;
+import java.util.function.Supplier;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.messaging.Source;
-
-import org.springframework.integration.annotation.InboundChannelAdapter;
-import org.springframework.integration.annotation.Poller;
-import org.springframework.integration.core.MessageSource;
-import org.springframework.messaging.support.GenericMessage;
+import org.springframework.context.annotation.Bean;
 
 /**
+ * Functional Source (Consumer):
+ * http://cloud.spring.io/spring-cloud-static/spring-cloud-stream/2.1.0.RC3/single/spring-cloud-stream.html#_spring_cloud_function
  *
  * @author Christian Tzolov
  */
+@SpringBootApplication
 @EnableBinding(Source.class)
 @EnableConfigurationProperties({ {{AppName}}SourceProperties.class })
 public class {{AppName}}SourceConfiguration {
@@ -42,8 +45,13 @@ public class {{AppName}}SourceConfiguration {
 	@Autowired
 	private {{AppName}}SourceProperties properties;
 
-    @InboundChannelAdapter(value = Source.OUTPUT, poller = @Poller(fixedDelay = "10", maxMessagesPerPoll = "1"))
-    public MessageSource<String> myMessageSource(){
-		return ()->new GenericMessage<>("Hello Spring Cloud Stream");
-    }
+	public static void main(String[] args) {
+		SpringApplication.run({{AppName}}SourceConfiguration.class,
+			"--spring.cloud.stream.function.definition=date");
+	}
+
+	@Bean
+	public Supplier<Date> date() {
+		return () -> new Date(12345L);
+	}
 }

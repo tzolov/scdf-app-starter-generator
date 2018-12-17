@@ -2,8 +2,10 @@ app:
   starter:
     outputFolder: ./output
 
-    parentAppName: twitter
+    parentAppName: twitter3
     parentAppVersion: 2.1.0.BUILD-SNAPSHOT
+
+    appStartersBuildVersion: 2.1.0.BUILD-SNAPSHOT
 
     springCloudStreamVersion: 2.1.0.RC3
     springCloudDependenciesParentVersion: 2.1.0.RC3
@@ -15,6 +17,12 @@ app:
 
       - appName: twitter-stream
         appType: source
+        appSubType: reactive_stream
+        appVersion: 2.1.0.BUILD-SNAPSHOT
+
+      - appName: twitter-stream2
+        appType: source
+        appSubType: functional
         appVersion: 2.1.0.BUILD-SNAPSHOT
 
       - appName: twitter-timeline
@@ -25,10 +33,21 @@ app:
         appType: sink
         appVersion: 2.1.0.BUILD-SNAPSHOT
 
+      - appName: twitter-update2
+        appType: sink
+        appSubType: functional
+        appVersion: 2.1.0.BUILD-SNAPSHOT
+
       - appName: twitter-message
         appType: sink
         appVersion: 2.1.0.BUILD-SNAPSHOT
 
       - appName: twitter-message
         appType: source
+        appSubType: reactive
+        appVersion: 2.1.0.BUILD-SNAPSHOT
+
+      - appName: twitter-geo
+        appType: processor
+        appSubType: functional
         appVersion: 2.1.0.BUILD-SNAPSHOT

@@ -3,27 +3,61 @@ package net.tzolov.scdf.app.starter.generator;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.validation.annotation.Validated;
 
 /**
  * @author Christian Tzolov
  */
 @ConfigurationProperties("app.starter")
+@Validated
 public class ScdfAppStarterGeneratorProperties {
 
+	/**
+	 * List of source, processor and sink Applications part for this application theme.
+	 */
+	@NotEmpty
 	private final List<AppDefinition> apps = new ArrayList<>();
 
+	/**
+	 * Location where the project source files are written.
+	 */
+	@NotNull
 	private File outputFolder = new File("./target/output");
 
-	private String parentAppName = "image-processing";
+	/**
+	 * Name of the application theme common for all applications in this theme.
+	 */
+	@NotEmpty
+	private String parentAppName;
 
-	private String parentAppVersion = "1.0.0.BUILD-SNAPSHOT";
+	/**
+	 * Version for the application theme.
+	 */
+	@NotEmpty
+	private String parentAppVersion;
 
-	private String springCloudStreamVersion = "2.0.0.RELEASE";
+	/**
+	 * Spring Cloud Stream version to use.
+	 */
+	@NotEmpty
+	private String springCloudStreamVersion;
 
-	private String springCloudDependenciesParentVersion = "2.0.2.RELEASE";
+	/**
+	 * Spring Cloud Dependency version.
+	 */
+	@NotEmpty
+	private String springCloudDependenciesParentVersion;
+
+	/**
+	 * App Starter Build Version
+	 */
+	@NotEmpty
+	private String appStartersBuildVersion;
 
 	public File getOutputFolder() {
 		return outputFolder;
@@ -63,6 +97,14 @@ public class ScdfAppStarterGeneratorProperties {
 
 	public void setSpringCloudDependenciesParentVersion(String springCloudDependenciesParentVersion) {
 		this.springCloudDependenciesParentVersion = springCloudDependenciesParentVersion;
+	}
+
+	public String getAppStartersBuildVersion() {
+		return appStartersBuildVersion;
+	}
+
+	public void setAppStartersBuildVersion(String appStartersBuildVersion) {
+		this.appStartersBuildVersion = appStartersBuildVersion;
 	}
 
 	public List<AppDefinition> getApps() {

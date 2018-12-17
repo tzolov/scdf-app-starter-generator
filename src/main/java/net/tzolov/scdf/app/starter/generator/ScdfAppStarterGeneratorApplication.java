@@ -47,7 +47,7 @@ public class ScdfAppStarterGeneratorApplication implements CommandLineRunner {
 
 		templateProperties.put("apps", properties.getApps());
 
-		templateProperties.put("app-starters-build-version", properties.getSpringCloudStreamVersion());
+		templateProperties.put("app-starters-build-version", properties.getAppStartersBuildVersion());
 		templateProperties.put("spring-cloud-dependencies-parent-version", properties.getSpringCloudDependenciesParentVersion());
 		templateProperties.put("spring-cloud-stream-version", properties.getSpringCloudStreamVersion());
 
@@ -122,7 +122,7 @@ public class ScdfAppStarterGeneratorApplication implements CommandLineRunner {
 		templateProperties.put("app-name-pkg", toPkg(appDefinition.getAppName()));
 
 		templateProperties.put("type", appDefinition.getAppType());
-		templateProperties.put("Type", capitalize(appDefinition.getAppType()));
+		templateProperties.put("Type", capitalize(appDefinition.getAppType().name()));
 
 		// app POM
 		File appDir = file(appStarterRootDirectory, "spring-cloud-starter-stream-" + appDefinition.getAppType() + "-" + appDefinition.getAppName());
@@ -144,7 +144,8 @@ public class ScdfAppStarterGeneratorApplication implements CommandLineRunner {
 				new FileWriter(file(appMetaInfDir, "spring.providers")));
 
 		// META-INF/spring-configuration-metadata-whitelist.properties
-		String propertyClassName = String.format("%s%sProperties", camelCase(appDefinition.getAppName()), capitalize(appDefinition.getAppType()));
+		String propertyClassName = String.format("%s%sProperties", camelCase(appDefinition.getAppName()),
+				capitalize(appDefinition.getAppType().name()));
 		FileCopyUtils.copy(
 				String.format("configuration-properties.classes=org.springframework.cloud.stream.app.%s.%s.%s",
 						toPkg(appDefinition.getAppName()), appDefinition.getAppType(), propertyClassName),
@@ -156,9 +157,12 @@ public class ScdfAppStarterGeneratorApplication implements CommandLineRunner {
 				new FileWriter(file(appMainSrcDir, propertyClassName + ".java")));
 
 		// app Configurations Class
-		String configurationClassName = camelCase(appDefinition.getAppName() + "-" + appDefinition.getAppType() + "-configuration.java");
+		String configurationClassName = camelCase(appDefinition.getAppName() + "-"
+				+ appDefinition.getAppType() + "-configuration.java");
 		FileCopyUtils.copy(
-				materialize("classpath:/template/App" + capitalize(appDefinition.getAppType()) + "Configuration.java", templateProperties),
+				materialize("classpath:/template/App"
+						+ capitalize(appDefinition.getAppType().name())
+						+ appDefinition.getAppSubType().getName() + "Configuration.java", templateProperties),
 				new FileWriter(file(appMainSrcDir, configurationClassName)));
 
 		// TESTS
@@ -167,7 +171,8 @@ public class ScdfAppStarterGeneratorApplication implements CommandLineRunner {
 
 		String integrationTestClassName = camelCase(appDefinition.getAppName() + "-" + appDefinition.getAppType() + "-integration-tests.java");
 		FileCopyUtils.copy(
-				materialize("classpath:/template/App" + capitalize(appDefinition.getAppType()) + "IntegrationTests.java", templateProperties),
+				materialize("classpath:/template/App" + capitalize(appDefinition.getAppType().name())
+						+ "IntegrationTests.java", templateProperties),
 				new FileWriter(file(appTestSrcDir, integrationTestClassName)));
 
 		// README
