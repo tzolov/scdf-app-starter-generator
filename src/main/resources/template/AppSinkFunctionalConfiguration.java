@@ -17,14 +17,22 @@
 package org.springframework.cloud.stream.app.{{app-name-pkg}}.sink;
 
 import java.util.function.Consumer;
+import java.util.function.Function;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.boot.autoconfigure.condition.NoneNestedConditions;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.stream.annotation.EnableBinding;
+import org.springframework.cloud.stream.app.twitter.common.OnMissingStreamFunctionDefinitionCondition;
+import org.springframework.context.annotation.Conditional;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.integration.dsl.IntegrationFlow;
+import org.springframework.integration.dsl.IntegrationFlows;
 import org.springframework.messaging.Message;
 import org.springframework.cloud.stream.messaging.Sink;
 
@@ -36,7 +44,7 @@ import org.springframework.context.annotation.Bean;
  *
  * @author Christian Tzolov
  */
-@SpringBootApplication
+@Configuration
 @EnableBinding(Sink.class)
 @EnableConfigurationProperties({ {{AppName}}SinkProperties.class })
 public class {{AppName}}SinkConfiguration {
@@ -46,13 +54,34 @@ public class {{AppName}}SinkConfiguration {
 	@Autowired
 	private {{AppName}}SinkProperties properties;
 
-	public static void main(String[] args) {
-		SpringApplication.run({{AppName}}SinkConfiguration.class,
-			"--spring.cloud.stream.function.definition=sink");
+	// Use the spring.cloud.stream.function.definition to override the default
+	// function composition. For example you can drop the toUpperCase transformation:
+	// --spring.cloud.stream.function.definition=toText|sinkConsumer
+
+	@Bean
+	@ConditionalOnMissingBean
+	@Conditional(OnMissingStreamFunctionDefinitionCondition.class)
+	public IntegrationFlow mySinkFlow(Sink sink) {
+
+		return IntegrationFlows
+			.from(sink.input())
+			.transform(Message.class, toText().andThen(upper())::apply)
+			.handle(sinkConsumer())
+			.get();
 	}
 
 	@Bean
-	public Consumer<String> sink() {
+	public Consumer<String> sinkConsumer() {
 		return System.out::println;
+	}
+
+	@Bean
+	public Function<Message<?>, String> toText() {
+		return message -> message.getPayload().toString();
+	}
+
+	@Bean
+	public Function<String, String> upper() {
+		return message -> message.toUpperCase();
 	}
 }

@@ -28,6 +28,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * Functional Source (Consumer):
@@ -35,7 +36,7 @@ import org.springframework.context.annotation.Bean;
  *
  * @author Christian Tzolov
  */
-@SpringBootApplication
+@Configuration
 @EnableBinding(Source.class)
 @EnableConfigurationProperties({ {{AppName}}SourceProperties.class })
 public class {{AppName}}SourceConfiguration {
@@ -45,9 +46,10 @@ public class {{AppName}}SourceConfiguration {
 	@Autowired
 	private {{AppName}}SourceProperties properties;
 
-	public static void main(String[] args) {
-		SpringApplication.run({{AppName}}SourceConfiguration.class,
-			"--spring.cloud.stream.function.definition=date");
+	@InboundChannelAdapter(value = Source.OUTPUT,
+			poller = @Poller(fixedDelay = "${ {{app-name-pkg}}.{{type}}.poll-interval:1000}", maxMessagesPerPoll = "1"))
+	public MessageSource<String> myMessageSource(){
+		return ()-> new GenericMessage<>("Hello Spring Cloud Stream");
 	}
 
 	@Bean

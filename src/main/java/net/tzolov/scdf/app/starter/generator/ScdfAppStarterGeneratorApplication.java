@@ -94,6 +94,11 @@ public class ScdfAppStarterGeneratorApplication implements CommandLineRunner {
 				materialize("classpath:/template/AppStarterCommon.java", templateProperties),
 				new FileWriter(file(appCommonSrcDir, camelCase(properties.getParentAppName()) + "Common.java")));
 
+		FileCopyUtils.copy(
+				materialize("classpath:/template/OnMissingStreamFunctionDefinitionCondition.java", templateProperties),
+				new FileWriter(file(appCommonSrcDir, "OnMissingStreamFunctionDefinitionCondition.java")));
+
+
 		// ---------------------------------
 		// App Test Support Sup Project
 		// ---------------------------------
@@ -135,8 +140,19 @@ public class ScdfAppStarterGeneratorApplication implements CommandLineRunner {
 		File appMainSrcDir = toDirs(appDir, "src.main.java." + appPackageName);
 		appMainSrcDir.mkdirs();
 
+		File appMainResourceDir = toDirs(appDir, "src.main.resources");
+		appMainResourceDir.mkdirs();
+
 		File appMetaInfDir = toDirs(appDir, "src.main.resources.META-INF");
 		appMetaInfDir.mkdirs();
+
+		// application.properties
+		FileCopyUtils.copy(
+				materialize("classpath:/template/app-"
+						+ appDefinition.getAppType().name() + "-"
+						+ appDefinition.getAppSubType().getName().toLowerCase() + ".properties",
+						templateProperties),
+				new FileWriter(file(appMainResourceDir, "application.properties")));
 
 		// META-INF/spring.providers
 		FileCopyUtils.copy(

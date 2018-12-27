@@ -42,7 +42,9 @@ public class {{AppName}}SourceConfiguration {
 	@Autowired
 	private {{AppName}}SourceProperties properties;
 
-    @InboundChannelAdapter(value = Source.OUTPUT, poller = @Poller(fixedDelay = "10", maxMessagesPerPoll = "1"))
+    @InboundChannelAdapter(value = Source.OUTPUT,
+			poller = @Poller(fixedDelay = "${ {{app-name-pkg}}.{{type}}.poll-interval:1000}",
+			maxMessagesPerPoll = "1"))
     public MessageSource<String> myMessageSource(){
 		return ()->new GenericMessage<>("Hello Spring Cloud Stream");
     }

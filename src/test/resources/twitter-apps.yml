@@ -2,17 +2,23 @@ app:
   starter:
     outputFolder: ./output
 
-    parentAppName: twitter3
+    parentAppName: twitter
     parentAppVersion: 2.1.0.BUILD-SNAPSHOT
 
     appStartersBuildVersion: 2.1.0.BUILD-SNAPSHOT
 
-    springCloudStreamVersion: 2.1.0.RC3
     springCloudDependenciesParentVersion: 2.1.0.RC3
+
+    springCloudStreamVersion: 2.1.0.RC3
 
     apps:
       - appName: twitter-search
         appType: source
+        appVersion: 2.1.0.BUILD-SNAPSHOT
+
+      - appName: twitter-search
+        appType: processor
+        appSubType: functional
         appVersion: 2.1.0.BUILD-SNAPSHOT
 
       - appName: twitter-stream

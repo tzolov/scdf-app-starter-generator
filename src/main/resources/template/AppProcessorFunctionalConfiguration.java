@@ -21,13 +21,18 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 
+import org.springframework.cloud.stream.app.twitter.common.OnMissingStreamFunctionDefinitionCondition;
 import org.springframework.cloud.stream.messaging.Processor;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Conditional;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.integration.dsl.IntegrationFlow;
+import org.springframework.integration.dsl.IntegrationFlows;
+import org.springframework.messaging.Message;
+
 
 /**
  * Functional Processor:
@@ -35,7 +40,7 @@ import org.springframework.context.annotation.Bean;
  *
  * @author Christian Tzolov
  */
-@SpringBootApplication
+@Configuration
 @EnableBinding(Processor.class)
 @EnableConfigurationProperties({ {{AppName}}ProcessorProperties.class })
 public class {{AppName}}ProcessorConfiguration {
@@ -45,12 +50,30 @@ public class {{AppName}}ProcessorConfiguration {
 	@Autowired
 	private {{AppName}}ProcessorProperties properties;
 
-	public static void main(String[] args) {
-		SpringApplication.run({{AppName}}ProcessorConfiguration.class, "--spring.cloud.stream.function.definition=toUpperCase");
+
+	// Use the spring.cloud.stream.function.definition to override the default function composition.
+	@Bean
+	@Conditional(OnMissingStreamFunctionDefinitionCondition.class)
+	public IntegrationFlow defaultProcessorFlow(Processor processor) {
+		return IntegrationFlows
+			.from(processor.input())
+			.transform(Message.class, text().andThen(trim()).andThen(upper())::apply)
+			.channel(processor.output())
+			.get();
 	}
 
 	@Bean
-	public Function<String, String> toUpperCase() {
+	public Function<Message<?>, String> text() {
+		return message -> message.getPayload().toString();
+	}
+
+	@Bean
+	public Function<String, String> trim() {
+		return s -> s.trim();
+	}
+
+	@Bean
+	public Function<String, String> upper() {
 		return s -> s.toUpperCase();
 	}
 }

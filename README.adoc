@@ -50,3 +50,9 @@ mvn clean install -PgenerateApps
 ```
 
 Above will create an `apps` folder with generated apps starters
+
+== Application Sub Types support:
+
+* `source` : none, functional, reactive, reactive_stream
+* `processor` : none, functional, reactive
+* `sink` : none, functional
