@@ -57,3 +57,27 @@ app:
         appType: processor
         appSubType: functional
         appVersion: 2.1.0.BUILD-SNAPSHOT
+
+      - appName: twitter-friendships
+        appType: sink
+        appSubType: functional
+        appVersion: 2.1.0.BUILD-SNAPSHOT
+
+      - appName: twitter-friendships
+        appType: source
+        appVersion: 2.1.0.BUILD-SNAPSHOT
+
+      - appName: twitter-users
+        appType: processor
+        appSubType: functional
+        appVersion: 2.1.0.BUILD-SNAPSHOT
+
+      - appName: twitter-trend
+        appType: processor
+        appSubType: functional
+        appVersion: 2.1.0.BUILD-SNAPSHOT
+
+      - appName: twitter-trend-location
+        appType: processor
+        appSubType: functional
+        appVersion: 2.1.0.BUILD-SNAPSHOT

@@ -26,8 +26,10 @@ import org.springframework.cloud.stream.messaging.Source;
 
 import org.springframework.integration.annotation.InboundChannelAdapter;
 import org.springframework.integration.annotation.Poller;
-import org.springframework.integration.core.MessageSource;
-import org.springframework.messaging.support.GenericMessage;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.MessageHeaders;
+import org.springframework.messaging.support.MessageBuilder;
+import org.springframework.util.MimeTypeUtils;
 
 /**
  *
@@ -43,9 +45,11 @@ public class {{AppName}}SourceConfiguration {
 	private {{AppName}}SourceProperties properties;
 
     @InboundChannelAdapter(value = Source.OUTPUT,
-			poller = @Poller(fixedDelay = "${ {{app-name-pkg}}.{{type}}.poll-interval:1000}",
-			maxMessagesPerPoll = "1"))
-    public MessageSource<String> myMessageSource(){
-		return ()->new GenericMessage<>("Hello Spring Cloud Stream");
+			poller = @Poller(fixedDelay = "${ {{app-name-pkg}}.{{type}}.poll-interval:1000}", maxMessagesPerPoll = "1"))
+    public Message<String> myMessageSource(){
+		return MessageBuilder
+			.withPayload("Hello Spring Cloud Stream")
+			.setHeader(MessageHeaders.CONTENT_TYPE, MimeTypeUtils.TEXT_PLAIN_VALUE)
+			.build();
     }
 }

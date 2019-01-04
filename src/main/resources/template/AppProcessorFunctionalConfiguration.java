@@ -36,7 +36,7 @@ import org.springframework.messaging.Message;
 
 /**
  * Functional Processor:
- * http://cloud.spring.io/spring-cloud-static/spring-cloud-stream/2.1.0.RC3/single/spring-cloud-stream.html#_spring_cloud_function
+ * http://cloud.spring.io/spring-cloud-static/spring-cloud-stream/2.1.0.RC4/single/spring-cloud-stream.html#_spring_cloud_function
  *
  * @author Christian Tzolov
  */

@@ -16,23 +16,25 @@
 
 package org.springframework.cloud.stream.app.{{app-name-pkg}}.source;
 
-import java.util.Date;
 import java.util.function.Supplier;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import org.springframework.integration.annotation.InboundChannelAdapter;
+import org.springframework.integration.annotation.Poller;
+import org.springframework.messaging.Message;
+import org.springframework.messaging.support.MessageBuilder;
+
 /**
  * Functional Source (Consumer):
- * http://cloud.spring.io/spring-cloud-static/spring-cloud-stream/2.1.0.RC3/single/spring-cloud-stream.html#_spring_cloud_function
+ * http://cloud.spring.io/spring-cloud-static/spring-cloud-stream/2.1.0.RC4/single/spring-cloud-stream.html#_spring_cloud_function
  *
  * @author Christian Tzolov
  */
@@ -40,20 +42,22 @@ import org.springframework.context.annotation.Configuration;
 @EnableBinding(Source.class)
 @EnableConfigurationProperties({ {{AppName}}SourceProperties.class })
 public class {{AppName}}SourceConfiguration {
-
-	private static final Log logger = LogFactory.getLog({{AppName}}SourceConfiguration.class);
+	private static final Log logger = LogFactory.getLog(CdcSourceConfiguration.class);
 
 	@Autowired
-	private {{AppName}}SourceProperties properties;
+	private CdcSourceProperties properties;
+
+	@Autowired
+	private Supplier<Message<byte[]>> textSupplier;
 
 	@InboundChannelAdapter(value = Source.OUTPUT,
-			poller = @Poller(fixedDelay = "${ {{app-name-pkg}}.{{type}}.poll-interval:1000}", maxMessagesPerPoll = "1"))
-	public MessageSource<String> myMessageSource(){
-		return ()-> new GenericMessage<>("Hello Spring Cloud Stream");
+		poller = @Poller(fixedDelay = "${ cdc.source.poll-interval:1000}", maxMessagesPerPoll = "1"))
+	public Message<byte[]> myMessageSource() {
+		return textSupplier.get();
 	}
 
 	@Bean
-	public Supplier<Date> date() {
-		return () -> new Date(12345L);
+	public Supplier<Message<byte[]>> textSupplier() {
+		return () -> MessageBuilder.withPayload("Hello Spring Cloud Stream".getBytes()).build();
 	}
 }

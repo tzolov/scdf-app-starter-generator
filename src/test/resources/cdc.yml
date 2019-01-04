@@ -1,0 +1,18 @@
+app:
+  starter:
+    outputFolder: ./output1
+
+    parentAppName: cdc
+    parentAppVersion: 2.1.0.BUILD-SNAPSHOT
+
+    appStartersBuildVersion: 2.1.0.BUILD-SNAPSHOT
+
+    springCloudDependenciesParentVersion: 2.1.0.RC3
+
+    springCloudStreamVersion: 2.1.0.RC4
+
+    apps:
+      - appName: cdc
+        appType: source
+        appSubType: functional
+        appVersion: 2.1.0.BUILD-SNAPSHOT
