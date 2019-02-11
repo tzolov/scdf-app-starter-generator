@@ -1,7 +1,13 @@
 :image-root: https://raw.githubusercontent.com/tzolov/scdf-app-starter-generator/tree/master/src/main/resources/doc
 = Spring Cloud Data Flow Application Starters Project Generator
 
-Uses YAML to generate app-starter project. For example lets create a `test.yml` file whit this content:
+Usually bootstrapping a fully-fledged Stream App Starter projects requires complying with certain project https://docs.spring.io/spring-cloud-stream-app-starters/docs/Einstein.RC1/reference/htmlsingle/#pom-dependencies[structure and dependencies] and following some https://docs.spring.io/spring-cloud-stream-app-starters/docs/Einstein.RC1/reference/htmlsingle/#namingconvention[code and configuration conventions].
+
+The `scdf-app-starter-generator` aim to simplify the bootstrapping task. It sues YAML projects descriptor to define the projects structure, names, programing models and key dependency versions.
+
+Generator uses this to pre-generate the projects skeleton complying with the conventions and following the best practices for the selected programming models.
+
+For example lets create a `test.yml` file whit this content:
 
 ```
 app:
