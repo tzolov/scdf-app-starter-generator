@@ -18,17 +18,17 @@ app:
 
       - appName: twitter-search
         appType: processor
-        appSubType: functional
+        programmingModel: functional
         appVersion: 2.1.0.BUILD-SNAPSHOT
 
       - appName: twitter-stream
         appType: source
-        appSubType: reactive_stream
+        programmingModel: reactive_stream
         appVersion: 2.1.0.BUILD-SNAPSHOT
 
       - appName: twitter-stream2
         appType: source
-        appSubType: functional
+        programmingModel: functional
         appVersion: 2.1.0.BUILD-SNAPSHOT
 
       - appName: twitter-timeline
@@ -41,7 +41,7 @@ app:
 
       - appName: twitter-update2
         appType: sink
-        appSubType: functional
+        programmingModel: functional
         appVersion: 2.1.0.BUILD-SNAPSHOT
 
       - appName: twitter-message
@@ -50,17 +50,17 @@ app:
 
       - appName: twitter-message
         appType: source
-        appSubType: reactive
+        programmingModel: reactive
         appVersion: 2.1.0.BUILD-SNAPSHOT
 
       - appName: twitter-geo
         appType: processor
-        appSubType: functional
+        programmingModel: functional
         appVersion: 2.1.0.BUILD-SNAPSHOT
 
       - appName: twitter-friendships
         appType: sink
-        appSubType: functional
+        programmingModel: functional
         appVersion: 2.1.0.BUILD-SNAPSHOT
 
       - appName: twitter-friendships
@@ -69,15 +69,15 @@ app:
 
       - appName: twitter-users
         appType: processor
-        appSubType: functional
+        programmingModel: functional
         appVersion: 2.1.0.BUILD-SNAPSHOT
 
       - appName: twitter-trend
         appType: processor
-        appSubType: functional
+        programmingModel: functional
         appVersion: 2.1.0.BUILD-SNAPSHOT
 
       - appName: twitter-trend-location
         appType: processor
-        appSubType: functional
+        programmingModel: functional
         appVersion: 2.1.0.BUILD-SNAPSHOT

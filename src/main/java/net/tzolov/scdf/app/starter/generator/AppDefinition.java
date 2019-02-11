@@ -13,14 +13,14 @@ public class AppDefinition {
 
 	public enum AppType {source, processor, sink}
 
-	public enum AppSubType {
+	public enum ProgrammingModel {
 
-		none(""), reactive("Reactive"),
+		default_model(""), reactive("Reactive"),
 		reactive_stream("ReactiveStream"), functional("Functional");
 
 		private final String name;
 
-		AppSubType(String name) {
+		ProgrammingModel(String name) {
 			this.name = name;
 		}
 
@@ -36,7 +36,7 @@ public class AppDefinition {
 	private AppType appType;
 
 	@NotNull
-	private AppDefinition.AppSubType appSubType = AppSubType.none;
+	private AppDefinition.ProgrammingModel programmingModel = ProgrammingModel.default_model;
 
 	@NotEmpty
 	private String appVersion;
@@ -57,12 +57,12 @@ public class AppDefinition {
 		this.appType = appType;
 	}
 
-	public AppSubType getAppSubType() {
-		return appSubType;
+	public ProgrammingModel getProgrammingModel() {
+		return programmingModel;
 	}
 
-	public void setAppSubType(AppSubType appSubType) {
-		this.appSubType = appSubType;
+	public void setProgrammingModel(ProgrammingModel programmingModel) {
+		this.programmingModel = programmingModel;
 	}
 
 	public String getAppVersion() {

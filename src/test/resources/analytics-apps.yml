@@ -18,5 +18,5 @@ app:
 
       - appName: counter
         appType: processor
-        appSubType: functional
+        programmingModel: functional
         appVersion: 2.1.0.BUILD-SNAPSHOT

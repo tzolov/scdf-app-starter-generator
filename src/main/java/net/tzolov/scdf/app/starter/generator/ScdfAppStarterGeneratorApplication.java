@@ -150,7 +150,7 @@ public class ScdfAppStarterGeneratorApplication implements CommandLineRunner {
 		FileCopyUtils.copy(
 				materialize("classpath:/template/app-"
 						+ appDefinition.getAppType().name() + "-"
-						+ appDefinition.getAppSubType().getName().toLowerCase() + ".properties",
+						+ appDefinition.getProgrammingModel().getName().toLowerCase() + ".properties",
 						templateProperties),
 				new FileWriter(file(appMainResourceDir, "application.properties")));
 
@@ -178,7 +178,7 @@ public class ScdfAppStarterGeneratorApplication implements CommandLineRunner {
 		FileCopyUtils.copy(
 				materialize("classpath:/template/App"
 						+ capitalize(appDefinition.getAppType().name())
-						+ appDefinition.getAppSubType().getName() + "Configuration.java", templateProperties),
+						+ appDefinition.getProgrammingModel().getName() + "Configuration.java", templateProperties),
 				new FileWriter(file(appMainSrcDir, configurationClassName)));
 
 		// TESTS

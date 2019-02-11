@@ -9,14 +9,17 @@ app:
     outputFolder: ./output
 
     parentAppName: hello-world
-    parentAppVersion: 1.0.0.BUILD-SNAPSHOT
+    parentAppVersion: 2.1.0.BUILD-SNAPSHOT
 
-    springCloudStreamVersion: 2.0.0.RELEASE
-    springCloudBuildVersion: 2.0.2.RELEASE
+    appStartersBuildVersion: 2.1.0.BUILD-SNAPSHOT
+
+    springCloudBuildVersion: 2.1.2.RELEASE
+    springCloudStreamVersion: 2.1.0.RELEASE
 
     apps:
       - appName: hello1
         appType: source
+        programmingModel: reactive_stream
         appVersion: 1.0.0.BUILD-SNAPSHOT
 
       - appName: hello2
@@ -25,6 +28,7 @@ app:
 
       - appName: hello3
         appType: processor
+        programmingModel: functional
         appVersion: 1.0.0.BUILD-SNAPSHOT
 
       - appName: hello4
@@ -51,8 +55,24 @@ mvn clean install -PgenerateApps
 
 Above will create an `apps` folder with generated apps starters
 
-== Application Sub Types support:
+== Programming Model support:
 
-* `source` : none, functional, reactive, reactive_stream
-* `processor` : none, functional, reactive
-* `sink` : none, functional
+Tool supports several programming models for the generated application starter projects.
+Use the `programmingModel` property to configure one of the following options:
+
+.Table Programming Models per Application Type
+|===
+|Application Type |Programming Models
+
+|source
+|default_model, functional, reactive, reactive_stream
+
+|processor
+|default_model, functional, reactive
+
+|sink
+|default_model, functional, reactive
+|===
+
+
+Not setting the `programmingModel` defaults to the `default_model`.

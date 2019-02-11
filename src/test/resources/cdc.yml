@@ -14,20 +14,20 @@ app:
     apps:
       - appName: cdc
         appType: source
-        appSubType: reactive
+        programmingModel: reactive
         appVersion: 2.1.0.BUILD-SNAPSHOT
 
       - appName: cdc-mysql
         appType: source
-        appSubType: reactive
+        programmingModel: reactive
         appVersion: 2.1.0.BUILD-SNAPSHOT
 
       - appName: cdc-postgres
         appType: source
-        appSubType: reactive_stream
+        programmingModel: reactive_stream
         appVersion: 2.1.0.BUILD-SNAPSHOT
 
       - appName: cdc-mongodb
         appType: source
-        appSubType: reactive_stream
+        programmingModel: reactive_stream
         appVersion: 2.1.0.BUILD-SNAPSHOT
