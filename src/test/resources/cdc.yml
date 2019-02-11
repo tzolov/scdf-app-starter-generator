@@ -1,18 +1,33 @@
 app:
   starter:
-    outputFolder: ./output1
+    outputFolder: ./output
 
     parentAppName: cdc
     parentAppVersion: 2.1.0.BUILD-SNAPSHOT
 
     appStartersBuildVersion: 2.1.0.BUILD-SNAPSHOT
 
-    springCloudDependenciesParentVersion: 2.1.0.RC3
+    springCloudBuildVersion: 2.1.0.RC3
 
     springCloudStreamVersion: 2.1.0.RC4
 
     apps:
       - appName: cdc
         appType: source
-        appSubType: functional
+        appSubType: reactive
+        appVersion: 2.1.0.BUILD-SNAPSHOT
+
+      - appName: cdc-mysql
+        appType: source
+        appSubType: reactive
+        appVersion: 2.1.0.BUILD-SNAPSHOT
+
+      - appName: cdc-postgres
+        appType: source
+        appSubType: reactive_stream
+        appVersion: 2.1.0.BUILD-SNAPSHOT
+
+      - appName: cdc-mongodb
+        appType: source
+        appSubType: reactive_stream
         appVersion: 2.1.0.BUILD-SNAPSHOT

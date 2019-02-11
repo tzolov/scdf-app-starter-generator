@@ -48,7 +48,7 @@ public class ScdfAppStarterGeneratorApplication implements CommandLineRunner {
 		templateProperties.put("apps", properties.getApps());
 
 		templateProperties.put("app-starters-build-version", properties.getAppStartersBuildVersion());
-		templateProperties.put("spring-cloud-dependencies-parent-version", properties.getSpringCloudDependenciesParentVersion());
+		templateProperties.put("spring-cloud-build-version", properties.getSpringCloudBuildVersion());
 		templateProperties.put("spring-cloud-stream-version", properties.getSpringCloudStreamVersion());
 
 		// ---------------------------------

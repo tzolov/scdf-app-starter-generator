@@ -51,7 +51,7 @@ public class ScdfAppStarterGeneratorProperties {
 	 * Spring Cloud Dependency version.
 	 */
 	@NotEmpty
-	private String springCloudDependenciesParentVersion;
+	private String springCloudBuildVersion;
 
 	/**
 	 * App Starter Build Version
@@ -91,12 +91,12 @@ public class ScdfAppStarterGeneratorProperties {
 		this.springCloudStreamVersion = springCloudStreamVersion;
 	}
 
-	public String getSpringCloudDependenciesParentVersion() {
-		return springCloudDependenciesParentVersion;
+	public String getSpringCloudBuildVersion() {
+		return springCloudBuildVersion;
 	}
 
-	public void setSpringCloudDependenciesParentVersion(String springCloudDependenciesParentVersion) {
-		this.springCloudDependenciesParentVersion = springCloudDependenciesParentVersion;
+	public void setSpringCloudBuildVersion(String springCloudBuildVersion) {
+		this.springCloudBuildVersion = springCloudBuildVersion;
 	}
 
 	public String getAppStartersBuildVersion() {

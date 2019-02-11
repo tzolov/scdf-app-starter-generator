@@ -8,7 +8,7 @@ app:
 
     springCloudStreamVersion: 2.0.0.RELEASE
 
-    springCloudDependenciesParentVersion: 2.0.2.RELEASE
+    springCloudBuildVersion: 2.0.2.RELEASE
 
     apps:
       - appName: koza1

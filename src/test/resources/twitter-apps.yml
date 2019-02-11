@@ -7,7 +7,7 @@ app:
 
     appStartersBuildVersion: 2.1.0.BUILD-SNAPSHOT
 
-    springCloudDependenciesParentVersion: 2.1.0.RC3
+    springCloudBuildVersion: 2.1.0.RC3
 
     springCloudStreamVersion: 2.1.0.RC3
 

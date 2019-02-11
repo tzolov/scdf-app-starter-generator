@@ -24,7 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 
-import org.springframework.cloud.stream.app.twitter.common.OnMissingStreamFunctionDefinitionCondition;
+import org.springframework.cloud.stream.app.{{app-name-pkg}}.common.OnMissingStreamFunctionDefinitionCondition;
 import org.springframework.cloud.stream.messaging.Processor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;

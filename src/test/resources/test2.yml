@@ -8,7 +8,7 @@ app:
     appStartersBuildVersion: 2.0.0.RELEASE
 
     springCloudStreamVersion: 2.0.0.RELEASE
-    springCloudDependenciesParentVersion: 2.0.2.RELEASE
+    springCloudBuildVersion: 2.0.2.RELEASE
 
     apps:
       - appName: webcam
