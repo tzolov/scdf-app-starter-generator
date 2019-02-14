@@ -43,24 +43,53 @@ app:
         appVersion: 1.0.0.BUILD-SNAPSHOT
 
 ```
-Common properties for all sub-projects part of this app starter umbrella theme:
 
-* outputFolder - Location where the project source files are written.
-* parentAppName - Name of the application theme common for all applications in this theme.
-* parentAppVersion - Version for the application theme.
-* appStartersBuildVersion - App Starter Build version to use.
-* springCloudBuildVersion - Spring Cloud Dependency version to use.
-* springCloudStreamVersion - Spring Cloud Stream version to use.
-* generateTestSupport - Generate an app-test-support sub-project.
-* generateCommon - Generate an app-common sub-project.
+.Table Common properties for all sub-projects part of this app starter umbrella theme:
+|===
+|Property |Description
 
-For every child, app definition the following properties are available:
+|outputFolder
+|Location where the project source files are written
 
-* appName - application name.
-* appVersion - application version.
-* appType - source, processor or sink
-* programmingModel - depends on the app type one of the following styles can be generated: default_model, functional, reactive, reactive_stream
+|parentAppName
+|Name of the application theme common for all applications in this theme
 
+|parentAppVersion
+|Version for the application theme
+
+|appStartersBuildVersion
+|App Starter Build version to use
+
+|springCloudBuildVersion
+|Spring Cloud Dependency version to use.
+
+|springCloudStreamVersion
+|Spring Cloud Stream version to use
+
+|generateTestSupport
+|Generate an app-test-support sub-project
+
+|generateCommon
+|Generate an app-common sub-project
+|===
+
+
+.Table For every child, app definition the following properties are available:
+|===
+|App Definition Property | Description
+
+|appName
+|Location where the project source files are written
+
+|appVersion
+|application version
+
+|appType
+|source, processor or sink
+
+|programmingModel
+|Depending on the app type one of the following styles is generated: default_model, functional, reactive, reactive_stream
+|===
 
 Runt the generator against the test.yml:
 
