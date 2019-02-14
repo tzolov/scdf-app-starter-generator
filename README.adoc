@@ -44,6 +44,7 @@ app:
 
 ```
 Common properties for all sub-projects part of this app starter umbrella theme:
+
 * outputFolder - Location where the project source files are written.
 * parentAppName - Name of the application theme common for all applications in this theme.
 * parentAppVersion - Version for the application theme.
@@ -54,6 +55,7 @@ Common properties for all sub-projects part of this app starter umbrella theme:
 * generateCommon - Generate an app-common sub-project.
 
 For every child, app definition the following properties are available:
+
 * appName - application name.
 * appVersion - application version.
 * appType - source, processor or sink
