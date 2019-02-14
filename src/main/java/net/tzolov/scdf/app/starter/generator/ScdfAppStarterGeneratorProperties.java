@@ -59,6 +59,16 @@ public class ScdfAppStarterGeneratorProperties {
 	@NotEmpty
 	private String appStartersBuildVersion;
 
+	/**
+	 * Generate an app-test-support sub-project
+	 */
+	private boolean generateTestSupport = false;
+
+	/**
+	 * Generate an app-common sub-project
+	 */
+	private boolean generateCommon = false;
+
 	public File getOutputFolder() {
 		return outputFolder;
 	}
@@ -109,5 +119,21 @@ public class ScdfAppStarterGeneratorProperties {
 
 	public List<AppDefinition> getApps() {
 		return apps;
+	}
+
+	public boolean isGenerateTestSupport() {
+		return generateTestSupport;
+	}
+
+	public void setGenerateTestSupport(boolean generateTestSupport) {
+		this.generateTestSupport = generateTestSupport;
+	}
+
+	public boolean isGenerateCommon() {
+		return generateCommon;
+	}
+
+	public void setGenerateCommon(boolean generateCommon) {
+		this.generateCommon = generateCommon;
 	}
 }

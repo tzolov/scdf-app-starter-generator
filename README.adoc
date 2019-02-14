@@ -20,6 +20,9 @@ app:
     springCloudBuildVersion: 2.1.2.RELEASE
     springCloudStreamVersion: 2.1.0.RELEASE
 
+    generateTestSupport: true
+    generateCommon: true
+
     apps:
       - appName: hello1
         appType: source
@@ -40,6 +43,22 @@ app:
         appVersion: 1.0.0.BUILD-SNAPSHOT
 
 ```
+Common properties for all sub-projects part of this app starter umbrella theme:
+* outputFolder - Location where the project source files are written.
+* parentAppName - Name of the application theme common for all applications in this theme.
+* parentAppVersion - Version for the application theme.
+* appStartersBuildVersion - App Starter Build version to use.
+* springCloudBuildVersion - Spring Cloud Dependency version to use.
+* springCloudStreamVersion - Spring Cloud Stream version to use.
+* generateTestSupport - Generate an app-test-support sub-project.
+* generateCommon - Generate an app-common sub-project.
+
+For every child, app definition the following properties are available:
+* appName - application name.
+* appVersion - application version.
+* appType - source, processor or sink
+* programmingModel - depends on the app type one of the following styles can be generated: default_model, functional, reactive, reactive_stream
+
 
 Runt the generator against the test.yml:
 
@@ -54,7 +73,7 @@ image::https://raw.githubusercontent.com/tzolov/scdf-app-starter-generator/maste
 Go inside the `hello-world` and generate the app starters:
 
 ```
-mvn clean install -PgenerateApps
+mvn clean install -Pspring -PgenerateApps
 ```
 
 Above will create an `apps` folder with generated apps starters

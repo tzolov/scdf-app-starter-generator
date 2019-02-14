@@ -28,7 +28,9 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.condition.NoneNestedConditions;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.stream.annotation.EnableBinding;
+{{#common}}
 import org.springframework.cloud.stream.app.{{app-name-pkg}}.common.OnMissingStreamFunctionDefinitionCondition;
+{{/common}}
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.integration.dsl.IntegrationFlow;
@@ -60,7 +62,9 @@ public class {{AppName}}SinkConfiguration {
 
 	@Bean
 	@ConditionalOnMissingBean
+	{{#common}}
 	@Conditional(OnMissingStreamFunctionDefinitionCondition.class)
+	{{/common}}
 	public IntegrationFlow mySinkFlow(Sink sink) {
 
 		return IntegrationFlows

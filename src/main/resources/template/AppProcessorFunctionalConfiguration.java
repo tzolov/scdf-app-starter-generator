@@ -23,8 +23,9 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.stream.annotation.EnableBinding;
-
+{{#common}}
 import org.springframework.cloud.stream.app.{{app-name-pkg}}.common.OnMissingStreamFunctionDefinitionCondition;
+{{/common}}
 import org.springframework.cloud.stream.messaging.Processor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
@@ -53,7 +54,9 @@ public class {{AppName}}ProcessorConfiguration {
 
 	// Use the spring.cloud.stream.function.definition to override the default function composition.
 	@Bean
+	{{#common}}
 	@Conditional(OnMissingStreamFunctionDefinitionCondition.class)
+	{{/common}}
 	public IntegrationFlow defaultProcessorFlow(Processor processor) {
 		return IntegrationFlows
 			.from(processor.input())

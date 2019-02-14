@@ -11,6 +11,9 @@ app:
 
     springCloudStreamVersion: 2.1.0.RC3
 
+    generateTestSupport: true
+    generateCommon: true
+
     apps:
       - appName: twitter-search
         appType: source

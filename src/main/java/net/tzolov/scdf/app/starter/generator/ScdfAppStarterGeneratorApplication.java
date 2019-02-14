@@ -51,6 +51,9 @@ public class ScdfAppStarterGeneratorApplication implements CommandLineRunner {
 		templateProperties.put("spring-cloud-build-version", properties.getSpringCloudBuildVersion());
 		templateProperties.put("spring-cloud-stream-version", properties.getSpringCloudStreamVersion());
 
+		templateProperties.put("test-support", properties.isGenerateTestSupport());
+		templateProperties.put("common", properties.isGenerateCommon());
+
 		// ---------------------------------
 		// App Parent POM
 		// ---------------------------------
@@ -81,36 +84,39 @@ public class ScdfAppStarterGeneratorApplication implements CommandLineRunner {
 		// ---------------------------------
 		// App Common Sub Project
 		// ---------------------------------
-		File appCommonDir = file(appParentDir, "spring-cloud-starter-stream-common-" + properties.getParentAppName());
-		appCommonDir.mkdir();
-		FileCopyUtils.copy(
-				materialize("classpath:/template/app-common-pom.xml", templateProperties),
-				new FileWriter(file(appCommonDir, "pom.xml")));
+		if (this.properties.isGenerateCommon()) {
+			File appCommonDir = file(appParentDir, "spring-cloud-starter-stream-common-" + properties.getParentAppName());
+			appCommonDir.mkdir();
+			FileCopyUtils.copy(
+					materialize("classpath:/template/app-common-pom.xml", templateProperties),
+					new FileWriter(file(appCommonDir, "pom.xml")));
 
-		File appCommonSrcDir = toDirs(appCommonDir,
-				"src.main.java.org.springframework.cloud.stream.app." + toPkg(properties.getParentAppName()) + ".common");
-		appCommonSrcDir.mkdirs();
-		FileCopyUtils.copy(
-				materialize("classpath:/template/AppStarterCommon.java", templateProperties),
-				new FileWriter(file(appCommonSrcDir, camelCase(properties.getParentAppName()) + "Common.java")));
+			File appCommonSrcDir = toDirs(appCommonDir,
+					"src.main.java.org.springframework.cloud.stream.app." + toPkg(properties.getParentAppName()) + ".common");
+			appCommonSrcDir.mkdirs();
+			FileCopyUtils.copy(
+					materialize("classpath:/template/AppStarterCommon.java", templateProperties),
+					new FileWriter(file(appCommonSrcDir, camelCase(properties.getParentAppName()) + "Common.java")));
 
-		FileCopyUtils.copy(
-				materialize("classpath:/template/OnMissingStreamFunctionDefinitionCondition.java", templateProperties),
-				new FileWriter(file(appCommonSrcDir, "OnMissingStreamFunctionDefinitionCondition.java")));
-
+			FileCopyUtils.copy(
+					materialize("classpath:/template/OnMissingStreamFunctionDefinitionCondition.java", templateProperties),
+					new FileWriter(file(appCommonSrcDir, "OnMissingStreamFunctionDefinitionCondition.java")));
+		}
 
 		// ---------------------------------
 		// App Test Support Sup Project
 		// ---------------------------------
-		File appTestSupportDir = file(appParentDir, properties.getParentAppName() + "-app-starters-test-support");
-		appTestSupportDir.mkdir();
-		FileCopyUtils.copy(
-				materialize("classpath:/template/app-test-support-pom.xml", templateProperties),
-				new FileWriter(file(appTestSupportDir, "pom.xml")));
+		if (this.properties.isGenerateTestSupport()) {
+			File appTestSupportDir = file(appParentDir, properties.getParentAppName() + "-app-starters-test-support");
+			appTestSupportDir.mkdir();
+			FileCopyUtils.copy(
+					materialize("classpath:/template/app-test-support-pom.xml", templateProperties),
+					new FileWriter(file(appTestSupportDir, "pom.xml")));
 
-		File testSupportSrcDir = toDirs(appTestSupportDir,
-				"src.main.java.org.springframework.cloud.stream.app.test." + toPkg(properties.getParentAppName()));
-		testSupportSrcDir.mkdirs();
+			File testSupportSrcDir = toDirs(appTestSupportDir,
+					"src.main.java.org.springframework.cloud.stream.app.test." + toPkg(properties.getParentAppName()));
+			testSupportSrcDir.mkdirs();
+		}
 
 		// ---------------------------------
 		// Child projects of type : source, processor or sink

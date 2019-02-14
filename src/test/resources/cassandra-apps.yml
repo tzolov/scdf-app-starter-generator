@@ -2,7 +2,7 @@ app:
   starter:
     outputFolder: ./output
 
-    parentAppName: analytics
+    parentAppName: cassandra
     parentAppVersion: 2.1.0.BUILD-SNAPSHOT
 
     appStartersBuildVersion: 2.1.0.BUILD-SNAPSHOT
@@ -11,24 +11,15 @@ app:
 
     springCloudStreamVersion: 2.1.0.RELEASE
 
-    generateTestSupport: false
-    generateCommon: false
+    generateTestSupport: true
+    generateCommon: true
 
     apps:
-      - appName: my-counter-reactive-source
+      - appName: cassandra
         appType: source
         programmingModel: reactive_stream
         appVersion: 2.1.0.BUILD-SNAPSHOT
 
-      - appName: counter
+      - appName: cassandra
         appType: sink
-        appVersion: 2.1.0.BUILD-SNAPSHOT
-
-      - appName: counter
-        appType: processor
-        appVersion: 2.1.0.BUILD-SNAPSHOT
-
-      - appName: counter-func
-        appType: sink
-        programmingModel: functional
         appVersion: 2.1.0.BUILD-SNAPSHOT

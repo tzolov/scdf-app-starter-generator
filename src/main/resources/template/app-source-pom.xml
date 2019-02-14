@@ -21,14 +21,22 @@
             <artifactId>spring-cloud-starter-config</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-stream-reactive</artifactId>
+        </dependency>
+        {{#common}}
+        <dependency>
             <groupId>org.springframework.cloud.stream.app</groupId>
             <artifactId>spring-cloud-starter-stream-common-{{parent-app-name}}</artifactId>
         </dependency>
+        {{/common}}
+        {{#test-support}}
         <dependency>
             <groupId>org.springframework.cloud.stream.app</groupId>
             <artifactId>{{parent-app-name}}-app-starters-test-support</artifactId>
             <scope>tests</scope>
         </dependency>
+        {{/test-support}}
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-stream-test-support</artifactId>

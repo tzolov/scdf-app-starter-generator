@@ -21,11 +21,13 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-stream-reactive</artifactId>
 		</dependency>
+		{{#test-support}}
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-stream-test-support</artifactId>
 			<scope>test</scope>
 		</dependency>
+		{{/test-support}}
 	</dependencies>
 
 </project>

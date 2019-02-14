@@ -11,6 +11,9 @@ app:
 
     springCloudStreamVersion: 2.1.0.RC4
 
+    generateTestSupport: true
+    generateCommon: true
+
     apps:
       - appName: cdc
         appType: source

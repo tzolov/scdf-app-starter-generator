@@ -10,6 +10,9 @@ app:
     springCloudStreamVersion: 2.0.0.RELEASE
     springCloudBuildVersion: 2.0.2.RELEASE
 
+    generateTestSupport: true
+    generateCommon: true
+
     apps:
       - appName: hello1
         appType: source

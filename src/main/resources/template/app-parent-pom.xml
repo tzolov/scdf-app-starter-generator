@@ -16,9 +16,12 @@
 
 	<modules>
 		<module>{{parent-app-name}}-app-dependencies</module>
+		{{#common}}
 		<module>spring-cloud-starter-stream-common-{{parent-app-name}}</module>
+		{{/common}}
+		{{#test-support}}
 		<module>{{parent-app-name}}-app-starters-test-support</module>
-
+		{{/test-support}}
 		{{#apps}}
 		<module>spring-cloud-starter-stream-{{appType}}-{{appName}}</module>
 		{{/apps}}

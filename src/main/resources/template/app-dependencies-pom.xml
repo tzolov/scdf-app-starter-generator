@@ -29,11 +29,13 @@
 				<version>{{spring-cloud-stream-version}}</version>
 			</dependency>
 
+			{{#common}}
 			<dependency>
 				<groupId>org.springframework.cloud.stream.app</groupId>
 				<artifactId>spring-cloud-starter-stream-common-{{parent-app-name}}</artifactId>
 				<version>{{parent-app-version}}</version>
 			</dependency>
+			{{/common}}
 
 			{{#apps}}
 			<dependency>
@@ -48,12 +50,14 @@
 				<artifactId>spring-cloud-common</artifactId>
 				<version>${spring-cloud-common.version}</version>
 			</dependency>
+			{{#test-support}}
 			<dependency>
 				<groupId>org.springframework.cloud.stream.app</groupId>
 				<artifactId>{{parent-app-name}}-app-starters-test-support</artifactId>
 				<version>{{parent-app-version}}</version>
 				<scope>test</scope>
 			</dependency>
+			{{/test-support}}
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-stream-test-support</artifactId>
